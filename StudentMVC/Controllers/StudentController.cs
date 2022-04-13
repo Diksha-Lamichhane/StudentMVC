@@ -63,5 +63,56 @@ namespace StudentMVC.Controllers
             return RedirectToAction("List");
         }
 
+        private UserServices _userServices;
+
+        // GET: Student
+
+        public ActionResult AddUser(int Student_ID)
+        {
+            UserModel obj = new UserModel();
+
+            obj.Student_ID = Student_ID;
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(UserModel model)
+        {
+            _userServices = new UserServices();
+
+            _userServices.CreateUser(model);
+
+            return RedirectToAction("List");
+        }
+
+        public ActionResult EditUser(int Student_ID = 0)
+        {
+            _userServices = new UserServices();
+
+            var model = _userServices.GetEditById(Student_ID);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserModel model)
+        {
+            _userServices = new UserServices();
+
+            _userServices.UpdateUser(model);
+
+            return RedirectToAction("List");
+        }
+
+        //[HttpPost]
+        public ActionResult DeleteUser(int Student_ID = 0)
+        {
+            _userServices = new UserServices();
+
+            _userServices.DeleteUser(Student_ID);
+
+            return RedirectToAction("List");
+        }
     }
 }

@@ -41,13 +41,12 @@ namespace StudentMVC.Service
                         obj.Name = Convert.ToString(_ds.Tables[0].Rows[i]["Name"]);
                         obj.Address = Convert.ToString(_ds.Tables[0].Rows[i]["Address"]);
                         obj.Phone = Convert.ToString(_ds.Tables[0].Rows[i]["Phone"]);
-
-                        getStuList.Add(obj);
+                        obj.ID = string.IsNullOrEmpty(_ds.Tables[0].Rows[i]["ID"].ToString()) ? 0 : Convert.ToInt32(_ds.Tables[0].Rows[i]["ID"]);
+                        obj.UserName = string.IsNullOrEmpty(_ds.Tables[0].Rows[i]["UserName"].ToString()) ? "-" : Convert.ToString(_ds.Tables[0].Rows[i]["UserName"]);
+                        getStuList.Add(obj); 
 
                     }
                 }
-
-
             }
             return getStuList;
         }
